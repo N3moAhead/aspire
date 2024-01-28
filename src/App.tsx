@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import TestCard from "./components/TestCard";
 
 const root = createRoot(document.body);
-root.render(<h2 className="text-red-600">First Render of Aspire</h2>);
+root.render(<TestCard />);
