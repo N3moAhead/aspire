@@ -1,4 +1,4 @@
-import { Title } from "@tremor/react";
+import { Card, Title } from "@tremor/react";
 import GoalList from "./DailyGoalList";
 import type { DailyGoal } from "../../../types/goal";
 
@@ -11,9 +11,9 @@ const goals: Array<DailyGoal> = [
 
 export default function DailyGoals() {
   return (
-    <div className="w-full">
+    <Card>
       <Title>Daily Goals</Title>
       <GoalList dailyGoals={goals} />
-    </div>
+    </Card>
   );
 }
