@@ -1,7 +1,7 @@
 const colors = require("tailwindcss/colors");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/*", "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}"],
+  content: ["./src/frontend/**/*.{tsx,ts,js}", "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}"],
   theme: {
     transparent: "transparent",
     current: "currentColor",
