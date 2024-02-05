@@ -37,7 +37,7 @@ export default function DailyGoals() {
       newDoneHash[activity.id] = activity.done;
     });
     setDoneHash(newDoneHash);
-  }, []);
+  }, [activities]);
 
   return (
     <Card>
