@@ -1,13 +1,13 @@
 import Chart from "../components/Chart";
-import DailyGoals from "../components/DailyGoals";
+import Activities from "../components/Activities";
 import MoodBoard from "../components/MoodBoard";
 
 export default function Main() {
   return (
-    <div className="p-2 md:p-16 grid grid-cols-1 md:grid-cols-2 gap-5 w-full h-full">
+    <div className="p-2 lg:p-16 grid grid-cols-1 lg:grid-cols-2 gap-5 w-full h-full">
       <MoodBoard />
-      <DailyGoals />
-      <div className="col-span-1 md:col-span-2">
+      <Activities />
+      <div className="col-span-1 lg:col-span-2">
         <Chart />
       </div>
     </div>
