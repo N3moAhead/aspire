@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Day {
+  id            Int             @id @default(autoincrement())
+  date          DateTime        @unique @default(now())
+  dayActivities DayActivities[]
+  dayMoods      DayMoods[]
+}
+
+model DayActivities {
+  id         Int      @id @default(autoincrement())
+  dayId      Int
+  day        Day      @relation(fields: [dayId], references: [id])
+  done       Boolean
+  activityId Int
+  activity   Activity @relation(fields: [activityId], references: [id])
+}
+
+model Activity {
+  id            Int             @id @default(autoincrement())
+  name          String
+  dayActivities DayActivities[]
+  category      Category?       @relation(fields: [categoryId], references: [id])
+  categoryId    Int?
+}
+
+model Category {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  activities  Activity[]
+}
+
+model DayMoods {
+  id     Int  @id @default(autoincrement())
+  dayId  Int
+  day    Day  @relation(fields: [dayId], references: [id])
+  value  Int
+  moodId Int
+  mood   Mood @relation(fields: [moodId], references: [id])
+}
+
+model Mood {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  dayMoods    DayMoods[]
+}
