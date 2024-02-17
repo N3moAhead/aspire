@@ -92,5 +92,4 @@ typings/
 out/
 
 # Sqlite Database
-prisma/dev.db
-prisma/dev.db-journal
+databases/
