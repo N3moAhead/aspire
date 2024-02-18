@@ -1,43 +1,41 @@
 import { Card, Title, Subtitle } from "@tremor/react";
-import type { DailyActivity } from "../../../types/goal";
+import type { Day } from "@prisma/client";
 import type { DoneHashType } from "../../../types/generic";
 import { useEffect, useState } from "react";
 import ActivityBoard from "./ActivityBoard";
+import { FullCategory, FullActivity } from "types/activity";
 
-const activities: Array<DailyActivity> = [
-  { description: "Sport", done: false, id: 1, color: "#84cc16" },
-  { description: "Freunde Treffen", done: false, id: 2, color: "#eab308" },
-  { description: "Tinder", done: false, id: 3, color: "#06b6d4" },
-  { description: "Wäsche", done: false, id: 4, color: "#0ea5e9" },
-  { description: "Zimmer Aufräumen", done: false, id: 5, color: "#10b981" },
-  { description: "Date", done: false, id: 6, color: "#14b8a6" },
-  { description: "Zocken", done: false, id: 7, color: "#a855f7" },
-  { description: "Kochen", done: false, id: 8, color: "#d946ef" },
-  { description: "Kuscheln", done: false, id: 9, color: "#84cc16" },
-  { description: "Wandern", done: false, id: 10, color: "#eab308" },
-  { description: "Party", done: false, id: 11, color: "#06b6d4" },
-  { description: "Rave", done: false, id: 12, color: "#0ea5e9" },
-  { description: "Festival", done: false, id: 13, color: "#10b981" },
-  { description: "Fernsehen", done: false, id: 14, color: "#14b8a6" },
-  { description: "Sauna", done: false, id: 16, color: "#d946ef" },
-  {
-    description: "Ganz viel mit katzen spielen!",
-    done: false,
-    id: 17,
-    color: "#d946ef",
-  },
-];
+interface DailyGoalProps {
+  day?: Day;
+}
 
-export default function DailyGoals() {
+export default function DailyGoal(props: DailyGoalProps) {
+  const { day } = props;
   const [doneHash, setDoneHash] = useState<DoneHashType>();
+  const [activities, setActivities] = useState<FullActivity[]>([]);
 
   useEffect(() => {
-    const newDoneHash: Record<number, boolean> = {};
-    activities.forEach((activity) => {
-      newDoneHash[activity.id] = activity.done;
-    });
-    setDoneHash(newDoneHash);
-  }, [activities]);
+    // TODO Add a loading animation and State
+    const getNewActivities = async () => {
+      const categories: FullCategory[] =
+        await window.api.getCategoriesForDay(day);
+      const newActivities: FullActivity[] = [];
+      const newDoneHash: DoneHashType = {};
+      categories.forEach((category: FullCategory) => {
+        category.activities.forEach((activity: FullActivity) => {
+          newActivities.push(activity);
+          const [status] = activity.dayActivities;
+          newDoneHash[activity.id] = status.done;
+        });
+      });
+      setActivities(newActivities);
+      setDoneHash(newDoneHash);
+    };
+
+    if (day) {
+      getNewActivities();
+    }
+  }, [day]);
 
   return (
     <Card>

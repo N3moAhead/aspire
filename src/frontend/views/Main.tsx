@@ -9,19 +9,17 @@ export default function Main() {
 
   useEffect(() => {
     const getCurrentDay = async () => {
-      const newCurrentDay = await window.dayController.getCurrentDay();
+      const newCurrentDay = await window.api.getCurrentDay();
       setCurrentDay(newCurrentDay);
     };
 
     getCurrentDay();
   }, []);
 
-  console.log(currentDay);
-
   return (
     <div className="p-2 lg:p-16 grid grid-cols-1 lg:grid-cols-2 gap-5 w-full h-full">
       <MoodBoard />
-      <Activities />
+      <Activities day={currentDay} />
       <div className="col-span-1 lg:col-span-2">
         <Chart />
       </div>
