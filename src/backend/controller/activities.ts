@@ -29,7 +29,6 @@ export async function toggleDayActivity(
   dayActivityId: number,
   newDone: boolean,
 ) {
-  console.log(dayActivityId);
   await prisma.dayActivities.update({
     where: {
       id: dayActivityId,

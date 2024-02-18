@@ -39,7 +39,6 @@ export async function getCurrentDay(): Promise<Day> {
   });
 
   if (!currentDay) {
-    console.log("Day does not exist its getting created!");
     currentDay = await createDay();
   }
 

@@ -12,23 +12,21 @@ interface DailyGoalProps {
 export default function DailyGoal(props: DailyGoalProps) {
   const { day } = props;
   const [doneHash, setDoneHash] = useState<DoneHashType>();
-  const [activities, setActivities] = useState<FullActivity[]>([]);
+  const [categories, setCategories] = useState<FullCategory[]>([]);
 
   useEffect(() => {
     // TODO Add a loading animation and State
     const getNewActivities = async () => {
-      const categories: FullCategory[] =
+      const newCategories: FullCategory[] =
         await window.api.getCategoriesForDay(day);
-      const newActivities: FullActivity[] = [];
       const newDoneHash: DoneHashType = {};
-      categories.forEach((category: FullCategory) => {
+      newCategories.forEach((category: FullCategory) => {
         category.activities.forEach((activity: FullActivity) => {
-          newActivities.push(activity);
           const [status] = activity.dayActivities;
           newDoneHash[activity.id] = status.done;
         });
       });
-      setActivities(newActivities);
+      setCategories(newCategories);
       setDoneHash(newDoneHash);
     };
 
@@ -42,7 +40,7 @@ export default function DailyGoal(props: DailyGoalProps) {
       <Title>Todays Activities</Title>
       <Subtitle>What did you do today?</Subtitle>
       <ActivityBoard
-        activities={activities}
+        categories={categories}
         doneHash={doneHash}
         setDoneHash={setDoneHash}
       />
