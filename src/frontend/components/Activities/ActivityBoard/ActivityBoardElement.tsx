@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { Text } from "@tremor/react";
-import { DoneHashType } from "types/generic";
-import { FullActivity } from "types/activity";
+import type { DoneHashType } from "types/generic";
+import type { FullActivity } from "types/activity";
 import debounce from "../../../helper/debounce";
 
 const debouncedToggleDay = debounce(window.api.toggleDayActivity, 300);
