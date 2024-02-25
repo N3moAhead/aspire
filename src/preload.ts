@@ -7,4 +7,5 @@ contextBridge.exposeInMainWorld("api", {
     ipcRenderer.invoke("getCategoriesForDay", day),
   toggleDayActivity: (dayActivityId: number, newDone: boolean) =>
     ipcRenderer.send("toggleDayActivity", dayActivityId, newDone),
+  getDayMoods: (day: Day) => ipcRenderer.invoke("getDayMoods", day),
 });
