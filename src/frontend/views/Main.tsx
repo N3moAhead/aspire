@@ -18,7 +18,7 @@ export default function Main() {
 
   return (
     <div className="p-2 lg:p-16 grid grid-cols-1 lg:grid-cols-2 gap-5 w-full h-full">
-      <MoodBoard />
+      <MoodBoard day={currentDay} />
       <Activities day={currentDay} />
       <div className="col-span-1 lg:col-span-2">
         <Chart />
