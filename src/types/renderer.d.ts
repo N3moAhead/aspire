@@ -7,6 +7,7 @@ export interface IElectronAPI {
   getCategoriesForDay: (day: Day) => Promise<FullCategory[]>;
   toggleDayActivity: (dayActivityId: number, newDone: boolean) => void;
   getDayMoods: (day: Day) => Promise<FullMood[]>;
+  setMoodValue: (dayMoodId: number, newMoodValue: number) => void;
 }
 
 declare global {

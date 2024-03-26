@@ -4,11 +4,12 @@ import {
   getCategoriesForDay,
   toggleDayActivity,
 } from "./controller/activities";
-import { getDayMoods } from "./controller/mood";
+import { getDayMoods, setMoodValue } from "./controller/mood";
 
 app.whenReady().then(() => {
   ipcMain.handle("getCurrentDay", getCurrentDay);
   ipcMain.handle("getCategoriesForDay", getCategoriesForDay);
   ipcMain.on("toggleDayActivity", toggleDayActivity);
-  ipcMain.on("getDayMoods", getDayMoods);
+  ipcMain.handle("getDayMoods", getDayMoods);
+  ipcMain.on("setMoodValue", setMoodValue);
 });

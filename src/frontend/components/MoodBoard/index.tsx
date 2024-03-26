@@ -21,13 +21,13 @@ export default function MoodBoard(props: MoodBoardProps) {
     if (day) {
       getMoods();
     }
-  }, []);
+  }, [day]);
 
   return (
     <Card>
       <Title>Mood</Title>
       <div className="grid grid-cols-1 gap-2">
-        {moods.map((mood) => (
+        {moods?.map((mood) => (
           <MoodSlider key={`MoodKey_${mood.id}`} mood={mood} />
         ))}
       </div>
